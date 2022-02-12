@@ -78,6 +78,6 @@ class HAN(nn.Module):
 
     def forward(self, g, h):
         for gnn in self.layers:
-            h = gnn(g, h)
+            h = gnn(g, h)         #h大小：3025*64
 
-        return self.predict(h)
+        return self.predict(h)    #return大小：3025*3
