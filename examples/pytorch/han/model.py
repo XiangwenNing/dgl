@@ -51,7 +51,7 @@ class HANLayer(nn.Module):
         # One GAT layer for each meta path based adjacency matrix
         self.gat_layers = nn.ModuleList()
         for i in range(num_meta_paths):
-            self.gat_layers.append(GATConv(in_size, out_size, layer_num_heads,
+            self.gat_layers.append(GATConv(in_size, out_size, layer_num_heads,           #GATConv是节点级别attention，即对每个meta path下求attention的结果
                                            dropout, dropout, activation=F.elu))
         self.semantic_attention = SemanticAttention(in_size=out_size * layer_num_heads)
         self.num_meta_paths = num_meta_paths
