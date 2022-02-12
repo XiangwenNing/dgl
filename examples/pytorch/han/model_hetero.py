@@ -63,7 +63,7 @@ class HANLayer(nn.Module):
         for i in range(len(meta_paths)):
             self.gat_layers.append(GATConv(in_size, out_size, layer_num_heads,
                                            dropout, dropout, activation=F.elu,
-                                           allow_zero_in_degree=True))
+                                           allow_zero_in_degree=True))        #GATConv是节点级别attention，即对每个meta path下求attention的结果
         self.semantic_attention = SemanticAttention(in_size=out_size * layer_num_heads)
         self.meta_paths = list(tuple(meta_path) for meta_path in meta_paths)
 
