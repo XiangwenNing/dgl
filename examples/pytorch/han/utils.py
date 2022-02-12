@@ -145,8 +145,8 @@ def load_acm(remove_self_loop):
     test_idx = torch.from_numpy(data['test_idx']).long().squeeze(0)
 
     num_nodes = author_g.number_of_nodes()         #节点数量为3025
-    train_mask = get_binary_mask(num_nodes, train_idx)
-    val_mask = get_binary_mask(num_nodes, val_idx)
+    train_mask = get_binary_mask(num_nodes, train_idx)  #train_mask是3025维。训练数据的位置值为1，否则为0
+    val_mask = get_binary_mask(num_nodes, val_idx)  
     test_mask = get_binary_mask(num_nodes, test_idx)
 
     print('dataset loaded')
