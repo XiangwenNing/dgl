@@ -60,7 +60,7 @@ class HANLayer(nn.Module):
         semantic_embeddings = []
 
         for i, g in enumerate(gs):
-            semantic_embeddings.append(self.gat_layers[i](g, h).flatten(1))            #self.gat_layers[i](g, h)大小为：3025*8*8 第一个8是output size，第二个8是head数量
+            semantic_embeddings.append(self.gat_layers[i](g, h).flatten(1))  #self.gat_layers[i](g, h)大小为：3025*8*8 第一个8是output size，第二个8是head数量。flatten后为：3025*64
         semantic_embeddings = torch.stack(semantic_embeddings, dim=1)                  # (N, M, D * K)    semantic_embeddings大小：3025*2*64
 
         return self.semantic_attention(semantic_embeddings)                            # (N, D * K)
