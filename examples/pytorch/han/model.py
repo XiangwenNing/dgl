@@ -15,11 +15,11 @@ class SemanticAttention(nn.Module):
         )
 
     def forward(self, z):
-        w = self.project(z).mean(0)                    # (M, 1)
-        beta = torch.softmax(w, dim=0)                 # (M, 1)
-        beta = beta.expand((z.shape[0],) + beta.shape) # (N, M, 1)
+        w = self.project(z).mean(0)                    # (M, 1)    self.project(z)大小：3025*2*1。w大小：2*1
+        beta = torch.softmax(w, dim=0)                 # (M, 1)    
+        beta = beta.expand((z.shape[0],) + beta.shape) # (N, M, 1)   beta大小：3025*2*1
 
-        return (beta * z).sum(1)                       # (N, D * K)
+        return (beta * z).sum(1)                       # (N, D * K)   beta * z大小：3025*2*64
 
 class HANLayer(nn.Module):
     """
@@ -61,7 +61,7 @@ class HANLayer(nn.Module):
 
         for i, g in enumerate(gs):
             semantic_embeddings.append(self.gat_layers[i](g, h).flatten(1))  #self.gat_layers[i](g, h)大小为：3025*8*8 第一个8是output size，第二个8是head数量。flatten后为：3025*64
-        semantic_embeddings = torch.stack(semantic_embeddings, dim=1)                  # (N, M, D * K)    semantic_embeddings大小：3025*2*64
+        semantic_embeddings = torch.stack(semantic_embeddings, dim=1)                  # (N, M, D * K)    semantic_embeddings大小：3025*2*64。2表示有2个meta path
 
         return self.semantic_attention(semantic_embeddings)                            # (N, D * K)
 
