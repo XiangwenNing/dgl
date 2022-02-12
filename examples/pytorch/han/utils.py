@@ -122,7 +122,7 @@ def load_acm(remove_self_loop):
     download(_get_dgl_url(url), path=data_path)
 
     with open(data_path, 'rb') as f:
-        data = pickle.load(f)
+        data = pickle.load(f)         #data是个字典，key是：label、feature、PAP、PLP、train_idx、val_idx和test_idx
 
     labels, features = torch.from_numpy(data['label'].todense()).long(), \
                        torch.from_numpy(data['feature'].todense()).float()
