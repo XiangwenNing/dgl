@@ -140,11 +140,11 @@ def load_acm(remove_self_loop):
     subject_g = dgl.from_scipy(data['PLP'])     #PLP下的邻接矩阵，大小：3025*3025
     gs = [author_g, subject_g]
 
-    train_idx = torch.from_numpy(data['train_idx']).long().squeeze(0)
+    train_idx = torch.from_numpy(data['train_idx']).long().squeeze(0)     #大小从1*600转为600
     val_idx = torch.from_numpy(data['val_idx']).long().squeeze(0)
     test_idx = torch.from_numpy(data['test_idx']).long().squeeze(0)
 
-    num_nodes = author_g.number_of_nodes()
+    num_nodes = author_g.number_of_nodes()         #节点数量为3025
     train_mask = get_binary_mask(num_nodes, train_idx)
     val_mask = get_binary_mask(num_nodes, val_idx)
     test_mask = get_binary_mask(num_nodes, test_idx)
