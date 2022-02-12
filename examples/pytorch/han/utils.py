@@ -124,10 +124,10 @@ def load_acm(remove_self_loop):
     with open(data_path, 'rb') as f:
         data = pickle.load(f)         #data是个字典，key是：label、feature、PAP、PLP、train_idx、val_idx和test_idx
 
-    labels, features = torch.from_numpy(data['label'].todense()).long(), \
-                       torch.from_numpy(data['feature'].todense()).float()
+    labels, features = torch.from_numpy(data['label'].todense()).long(), \         #label大小：3025*3（labels是one hot形式，所以是三维的
+                       torch.from_numpy(data['feature'].todense()).float()         #feature大小：3025*1870
     num_classes = labels.shape[1]
-    labels = labels.nonzero()[:, 1]
+    labels = labels.nonzero()[:, 1]                                                #将label大小：3025*1（将one hot转为0到label类别数-1）          
 
     if remove_self_loop:
         num_nodes = data['label'].shape[0]
