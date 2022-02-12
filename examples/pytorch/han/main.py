@@ -40,7 +40,7 @@ def main(args):
     val_mask = val_mask.to(args['device'])
     test_mask = test_mask.to(args['device'])
 
-    if args['hetero']:
+    if args['hetero']:            #如果异构图下的邻接矩阵没有，就走这个条件。因为现在有异构图下的邻接矩阵，所以走的是else。
         from model_hetero import HAN
         model = HAN(meta_paths=[['pa', 'ap'], ['pf', 'fp']],
                     in_size=features.shape[1],
