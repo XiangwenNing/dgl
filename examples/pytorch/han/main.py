@@ -30,7 +30,7 @@ def main(args):
     val_mask, test_mask = load_data(args['dataset'])
 
     if hasattr(torch, 'BoolTensor'):
-        train_mask = train_mask.bool()
+        train_mask = train_mask.bool()     #把0，1变为布尔类型
         val_mask = val_mask.bool()
         test_mask = test_mask.bool()
 
