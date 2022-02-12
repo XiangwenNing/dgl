@@ -136,7 +136,7 @@ def load_acm(remove_self_loop):
 
     # Adjacency matrices for meta path based neighbors
     # (Mufei): I verified both of them are binary adjacency matrices with self loops
-    author_g = dgl.from_scipy(data['PAP'])
+    author_g = dgl.from_scipy(data['PAP'])      #PAP下的邻接矩阵
     subject_g = dgl.from_scipy(data['PLP'])
     gs = [author_g, subject_g]
 
