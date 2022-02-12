@@ -74,7 +74,7 @@ class HAN(nn.Module):
         for l in range(1, len(num_heads)):
             self.layers.append(HANLayer(num_meta_paths, hidden_size * num_heads[l-1],
                                         hidden_size, num_heads[l], dropout))
-        self.predict = nn.Linear(hidden_size * num_heads[-1], out_size)
+        self.predict = nn.Linear(hidden_size * num_heads[-1], out_size)         #out_size是3，因为num of class是3
 
     def forward(self, g, h):
         for gnn in self.layers:
